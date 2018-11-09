@@ -1,19 +1,20 @@
 package com.pengjunlee.hive.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.sql.DataSource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.Map;
 
 /**
  * 使用 DataSource 操作 Hive
@@ -24,13 +25,17 @@ public class HiveDataSourceController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HiveDataSourceController.class);
 
+    @Autowired
+    @Qualifier("hiveDruidDataSource")
+    DataSource druidDataSource;
+
 	@Autowired
 	@Qualifier("hiveJdbcDataSource")
 	org.apache.tomcat.jdbc.pool.DataSource jdbcDataSource;
 
 	@Autowired
-	@Qualifier("hiveDruidDataSource")
-	DataSource druidDataSource;
+	@Qualifier("hiveJdbcTemplate")
+	JdbcTemplate hiveJdbcTemplate;
 
 	/**
 	 * 列举当前Hive库中的所有数据表
@@ -47,6 +52,13 @@ public class HiveDataSourceController {
 			list.add(res.getString(1));
 		}
 		return list;
+	}
+
+	@RequestMapping("/tables")
+	public List<Map<String, Object>> tables(){
+		String sql = "show tables";
+		List<Map<String, Object>> mapList = hiveJdbcTemplate.queryForList(sql);
+		return mapList;
 	}
 
 	/**
