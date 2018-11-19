@@ -1,6 +1,5 @@
 package com.pengjunlee.hive.util;
 
-import org.apache.commons.httpclient.util.DateUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
