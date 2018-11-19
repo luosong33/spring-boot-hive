@@ -1,5 +1,6 @@
 hive:
-  url: jdbc:hive2://i-kz8o5fp0:10000/dataware?useUnicode=true&characterEncoding=UTF-8
+  # i-851rnvp8, i-kz8o5fp0
+  url: jdbc:hive2://i-851rnvp8:10000/dataware?useUnicode=true&characterEncoding=UTF-8
   driver-class-name: org.apache.hive.jdbc.HiveDriver
   type: com.alibaba.druid.pool.DruidDataSource
   user: root
