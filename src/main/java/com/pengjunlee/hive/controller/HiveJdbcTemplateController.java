@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 使用 JdbcTemplate 操作 Hive
+ * 使用 JdbcTemplate（2种不同数据源） 操作 Hive
  */
 @RestController
 @RequestMapping("/hive2")

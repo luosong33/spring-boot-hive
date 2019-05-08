@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 使用 DataSource 操作 Hive
+ * 使用 2种不同DataSource直接操作 Hive
  */
 @RestController
 @RequestMapping("/hive")
